@@ -1,0 +1,13 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ModelHasRole extends Model
+{
+    Public $timestamps = false;
+    protected $fillable = [
+        'role_id', 'model_type', 'model_id',
+    ];
+}
