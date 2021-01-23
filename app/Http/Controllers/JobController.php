@@ -166,17 +166,9 @@ class JobController extends Controller
         $id = Candidate::where('job_name', $job->title)->where('user_id', $user_id)->first();
         $i = 0;
 
-        if(is_null($request->answers[0]))
+        if(is_null($request->questions[0]))
         {
             $user = Auth::user();
-            
-            Mail::send('mail' , ['name' => $user->name , 'job' => $job->title] , function ($message) use ($user)
-            {
-                $message->to($user->email , $user->name)->subject('Job Applied Successfully');
-            });
-
-            return redirect('/show')->with('flash_message', 
-            'Application for job ('. $job->title.') is submitted successfully');
         }
         else
         {
@@ -199,7 +191,7 @@ class JobController extends Controller
         });
 
         return redirect('/show')->with('flash_message', 
-        'Application for job ('. $job->title.') is submitted successfullyw');
+        'Application for job ('. $job->title.') is submitted successfully');
     }
     
     public function destroy($id)

@@ -8,9 +8,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('', 'Job Portal') }}</title>
-
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -32,6 +30,7 @@
         ]) !!};
     </script>
     <script src="https://use.fontawesome.com/9712be8772.js"></script>
+    @yield('styles')
 </head>
 <body>
     <div id="app" >
@@ -60,12 +59,12 @@
                         <li><a href="{{ url('/show') }}" class="w3-hover-teal">Jobs Vacancy</a></li>
                         
                         @can('Administer roles & permissions' )
-                        <li><a href="{{ route('jobs.create') }}" class="w3-hover-teal">Create Job</a></li>
-                        <li><a href="{{ route('permissions.index') }}" class="w3-hover-teal">Permissions</a></li>
-                        <li><a href="{{ route('roles.index') }}" class="w3-hover-teal">Roles</a></li>
-                        <li><a href="{{ route('users.index') }}" class="w3-hover-teal">Users</a></li>
-                         @endcan
-                         
+	                        <li><a href="{{ route('jobs.create') }}" class="w3-hover-teal">Create Job</a></li>
+	                        <li><a href="{{ route('permissions.index') }}" class="w3-hover-teal">Permissions</a></li>
+	                        <li><a href="{{ route('roles.index') }}" class="w3-hover-teal">Roles</a></li>
+	                        <li><a href="{{ route('users.index') }}" class="w3-hover-teal">Users</a></li>
+                        @endcan
+                        <li><a href="{{ url('countries') }}" class="w3-hover-teal">Countries <sup>(REST API)</sup></a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -116,10 +115,11 @@
         </div>
 
         @yield('content')
-
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    @yield('javascripts')
 </body>
 </html>
