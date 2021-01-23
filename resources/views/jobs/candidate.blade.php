@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
-@section('title', '| Edit Post')
+@section('title', '| Candidate')
 
 @section('content')
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
     <head>
+        <title>Job Portal @yield('title')</title>
+        
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" rel="stylesheet">
     </head>
@@ -19,7 +21,7 @@
     </style>
 
     <header align="center" class="w3-container w3-center w3-padding-32" style="font-family: cursive;"> 
-        <h1><b>Candidates Applied for {{$job->title}} Job</b></h1>
+        <h1><b>Candidate Details for <span class="w3-tag">{{$job->title}}</span> Job</b></h1>
         <p>Welcome to the Jobs Portal of <span class="w3-tag">GlowLogix</span></p>
     </header>
 
@@ -29,11 +31,11 @@
                 @csrf
                 <div class="card">
                     <div class="col-md-10">
-                        <div class="w3-row w3-light-blue" style="width: 1100px;">
-                            <div class="w3-card-4 w3-margin w3-white" style="width: 1070px;"></br>
+                        <div class="w3-row w3-light-blue" style="width: 1100px; margin-left: 18px;">
+                            <div class="w3-card-4 w3-margin w3-white" style="width: 1070px;">
+                                <a href="{{url()->previous()}}" title="Go Back" class="w3-margin w3-hover-light-blue btn btn-primary" role="back"><i class="far fa-arrow-alt-circle-left" style="color: black;"></i></a>
                                 <div class="card-body w3-margin ">
                                     <div class="form-group" id="job" style="width: 1050px;">
-                                        <a href="{{url()->previous()}}" title="Go Back" class="w3-hover-light-blue btn btn-primary" role="back"><i class="far fa-arrow-alt-circle-left" style="color: black;"></i></a>
                                         <h3 align="center" style="line-height: 40px;">
                                             <label name="id" > <u>Candidate ID</u> : {{$candidate->id}}</label></br>
                                             <label name="candidate_name" > <u>Candidate Name</u> : {{$candidate->candidate_name}}</label></br>

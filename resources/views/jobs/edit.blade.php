@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
-@section('title', '| Create New Post')
+@section('title', '| Edit Job')
 
 @section('content')
 <!DOCTYPE html>
 <html>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
     <head>
+        <title>Job Portal @yield('title')</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" rel="stylesheet">
     </head>
@@ -35,6 +38,7 @@
                                     <div class="card">
                                         <div class="w3-row w3-light-blue" style="width: 730px; margin-left: 103.5px;">
                                             <div class="w3-card-4 w3-margin w3-white" style="width: 700px; margin-left: 20px;">
+                                                <a href="{{url()->previous()}}" title="Go Back" class="w3-margin w3-hover-light-blue btn btn-primary" role="back"><i class="far fa-arrow-alt-circle-left" style="color: black;"></i></a></br>
                                                 <img src="{{ asset('storage/job.png') }}" alt="Nature" style="width:100%; height: 300px"></br></br>
                                                 <div class="card-body">                                
                                                     <div class="form-group" id="job" style="width:660px; margin-left: 20px;">

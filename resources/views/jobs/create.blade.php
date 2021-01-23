@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
-@section('title', '| Create New Post')
+@section('title', '| Create New Job')
 
 @section('content')
 <!DOCTYPE html>
 <html>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
     <head>
+        <title>Job Portal @yield('title')</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" rel="stylesheet">
     </head>
@@ -76,7 +79,7 @@
                                             $(document).ready(function(){
                                                 $('#addQuestion').click(function(){
                                                     $('#job').append('</br><label for=""><u>Question:</u></label><input type="text" name="questions[]" class="form-control">');
-                                                    $('#job').append('<label for=""><u>Field:</u></label><input type="text" name="fields[]" placeholder="Press 1 for Text Box and 2 for Text Area" class="form-control">');
+                                                    $('#job').append('<select id="experience" name="fields[]" class="form-control float-right" required><option value="">choose..</option><option value="Text Box">Text Box</option><option value="Text Area">Text Area</option><option value="Gender">Gender</option></select>');
                                                 });
                                             });
                                         </script>
