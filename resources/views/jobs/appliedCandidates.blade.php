@@ -58,7 +58,7 @@
                                                 </tr>
                                             </thead>
                                             <?php $i='0'; ?>
-                                            <tbody>
+                                            <tbody style="color: black;">
                                                 @foreach($candidates as $cndt)
                                                     <?php $i++ ?>
                                                     <tr align="center" style="color: black;">

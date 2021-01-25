@@ -40,7 +40,8 @@
                                             <label name="id" > <u>Candidate ID</u> : {{$candidate->id}}</label></br>
                                             <label name="candidate_name" > <u>Candidate Name</u> : {{$candidate->candidate_name}}</label></br>
                                             <label name="candidate_email" > <u>Candidate Email</u> : {{$candidate->candidate_email}}</label></br>
-                                            <label name="title" > <u>Job Name</u> : {{$job->title}}</label>
+                                            <label name="title" > <u>Job Name</u> : {{$job->title}}</label></br>
+                                            <td><a href="{{ asset('storage/'. $candidate->candidate_cv) }}" title="View Cv" style="color: black;" class="btn btn-info" role="button"><b>View Cv</b></a></td>
                                         </h3>
                                         </br>
                                         <table align="center" class="table table-striped w3-card-4" style="border-style: solid; border-color: black; width: 98%; margin-right: 15px;">

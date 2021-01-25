@@ -19,7 +19,6 @@ class JobController extends Controller
         return redirect('show');
     }
 
-    
     public function create()
     {
         $question = new Question;
@@ -148,6 +147,11 @@ class JobController extends Controller
    
     public function apply(Request $request)
     {
+        $request->validate
+        ([
+            'file'=>'mimes:pdf'
+        ]);
+
         $path = $request->file('file')->storeAs('Resume', $request->title . ' ' . $request->file('file')->getClientOriginalName());
 
         $job = Job::find($request->apply);
@@ -166,11 +170,7 @@ class JobController extends Controller
         $id = Candidate::where('job_name', $job->title)->where('user_id', $user_id)->first();
         $i = 0;
 
-        if(is_null($request->questions[0]))
-        {
-            $user = Auth::user();
-        }
-        else
+        if(!empty($request->answers[$i]))
         {
             foreach($request->answers as $ansr)
             {

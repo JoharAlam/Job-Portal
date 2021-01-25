@@ -78,8 +78,8 @@
                                         <script>
                                             $(document).ready(function(){
                                                 $('#addQuestion').click(function(){
-                                                    $('#job').append('</br><label for=""><u>Question:</u></label><input type="text" name="questions[]" class="form-control">');
-                                                    $('#job').append('<select id="experience" name="fields[]" class="form-control float-right" required><option value="">choose..</option><option value="Text Box">Text Box</option><option value="Text Area">Text Area</option><option value="Gender">Gender</option></select>');
+                                                    $('#job').append('</br><label for=""><u>Question:</u></label><input type="text" name="questions[]" class="form-control"></br>');
+                                                    $('#job').append('<select id="experience" name="fields[]" class="form-control float-right" style="color:black;" required><option value="" style="color: black;">Choose Field</option><option value="Text Box">Text Box</option><option value="Text Area">Text Area</option><option value="Gender">Gender</option></select>');
                                                 });
                                             });
                                         </script>
