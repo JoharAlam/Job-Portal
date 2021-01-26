@@ -66,7 +66,7 @@
     <body>
         <p>Dear {{$name}},</p>
         <p>
-            Your application for the job <b>{{$job}}</b> is submitted successfully. Wish you all the best for your future from the team of Job Portal.</br></br>
+            The job <b>{{$job}}</b> for which you recetly applied is updated. Please apply again.</br></br>
             Thank you.
         </p>
     </body>

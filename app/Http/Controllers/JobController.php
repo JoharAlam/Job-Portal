@@ -116,17 +116,29 @@ class JobController extends Controller
         $job->department = $request->department;
         $job->experience = $request->experience;
         $job->salary = $request->salary;
+        if($request->status == '1')
+        {
+            $job->status = '1';
+        }
+        else
+        {
+            $job->status = '0';
+        }
         $job->save();
 
         $jobs = Job::find($job->id);
         $question = $jobs->questions;
+        $candidate = $jobs->candidates;
+        $answer = $jobs->answers;
         $question->each->delete();
+        $answer->each->delete();
+        $candidate->each->delete();
+
 
         $i='0';
         if(is_null($request->questions[0]))
         {
-            return redirect('/show')->with('flash_message', 
-            'The '. $job->title.' job is updated successfully');
+
         }
         else
         {
@@ -139,10 +151,16 @@ class JobController extends Controller
                 $job->questions()->save($question);
                 $i++;
             }
-
-            return redirect('/show')->with('flash_message', 
-            'The '. $job->title.' job is updated successfully');
         }
+
+        $user = Auth::user();
+        Mail::send('upmail' , ['name' => $user->name , 'job' => $job->title] , function ($message) use ($user)
+        {
+            $message->to($user->email , $user->name)->subject('Job Applied Successfully');
+        });
+
+        return redirect('/show')->with('flash_message', 
+        'The '. $job->title.' job is updated successfully');
     }
    
     public function apply(Request $request)

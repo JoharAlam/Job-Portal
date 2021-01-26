@@ -36,11 +36,20 @@
           elseif(!empty($candidate) && Auth::user()){
         $id = Candidate::where('job_name', $job->title)->where('user_id', Auth::user()->id)->first(); }
       ?>
-      <div class="w3-row w3-light-blue" style="margin-left: 370px; width: 730px;">
+      <div class="w3-row w3-light-blue" style="margin-left: 370px; width: 731px;">
         <!-- Blog entries -->
         <div class="w3-col l8 s12">
           <!-- Blog entry -->
           <div class="w3-card-4 w3-margin w3-white" style="width: 700px;">
+        
+          <div class="w3-margin" align="right">
+            @if($job->status == '1')
+                <label align="center" title="opened" class="w3-green" style="height: 10%; width: 15%;">Job Opened</label>
+            @endif
+            @if($job->status == '0')
+                <label align="center" title="closed" class="w3-red" style="height: 10%; width: 15%;">Job Closed</label>
+            @endif
+          </div>
             <img src="{{ asset('storage/job.png') }}" alt="Nature" style="width:100%; height: 300px">
             <div class="w3-container">
               <h3><b>Title: <u>{{ $job->title }}</u></a></h3>
@@ -54,14 +63,16 @@
             <div class="w3-container" class="teaser">
               <p><b><u>Description:</u> {{  Str::limit($job->description, 100) }} {{-- Limit teaser to 100 characters --}}</b></p><hr>
               <div class="w3-row" >
-                <div class="w3-col m8 s12">
-
+                <div class="w3-col m14 s12">
+                  
                   <?php $user = Auth::user(); ?>
                   @if(!empty($id))
                     <button title="Your are already applied for this job" class="btn btn-success" type="button" style="background-color: green;" disabled>Applied <i class="far fa-file-alt"></i></button>
                   @endif
                   @if(empty($id) || $user->name == 'Admin')
+                    @if($job->status == '1')
                     <a href="{{ url('/jobs/view', $job->id) }}" title="View Job Details" class="btn btn-success" role="button"><i class="fa fa-eye" style="color:black;" ></i></a>
+                    @endif
                   @endif
                   @canany(['Administer roles & permissions' , 'Show Candidates']) 
                   <a href="{{ url('/jobs/appliedCandidates', $job->id) }}" title="View Applied Candidates" class="btn btn-info" role="button"><i class="fa fa-users" style="color: black;"></i></a>
@@ -80,5 +91,11 @@
       </div></br>
     @endforeach
   </body>
+  <script>
+    $(document).ready(function(){
+        $('#status').click(function(){
+        });
+    });
+    </script>
 </html>
 @endsection

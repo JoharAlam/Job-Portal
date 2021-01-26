@@ -59,15 +59,15 @@
 
                                             @if (Auth::user())
                                                 <label for="" ><span style="color:red">*</span> CV: Upload CV with your name</label>
-                                                <input style="color: black;" type="file" name="file" id="file" required></br>
+                                                <input style="color: black;" type="file" name="file" id="file" required>
                                                 @foreach($questions as $qstn)
+                                                    </br>
                                                     <h4 style="color: black;" readonly><span style="color:red">*</span><u>Questions:</u> {{$qstn->question}}</h4>
                                                     @if($qstn->field == 'Text Box')
                                                         <input type="text" class="form-control" name="answers[]" placeholder="write your answer.." required>
-                                                        </br>
                                                     @endif
                                                     @if($qstn->field == 'Text Area')
-                                                        <textarea type="text" class="form-control" name="answers[]" placeholder="write your answer.." required></textarea></br>
+                                                        <textarea type="text" class="form-control" name="answers[]" placeholder="write your answer.." required></textarea>
                                                     @endif
                                                     @if($qstn->field == 'Gender')
                                                           <pre>              <input type="radio" id="male" name="answers[]" value="Male" required><label for="male"> Male</label>            <input type="radio" id="female" name="answers[]" value="Female" required><label for="female"> Female</label>            <input type="radio" id="other" name="answers[]" value="Other" required><label for="other"> Other</label></pre>

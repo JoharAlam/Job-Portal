@@ -21,6 +21,7 @@ class CreateJobsTable extends Migration
             $table->string('department')->nullable();
             $table->string('experience')->nullable();
             $table->string('salary')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

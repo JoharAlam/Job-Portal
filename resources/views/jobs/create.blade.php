@@ -66,7 +66,14 @@
                                                         <input type="text" class="form-control" name="description" required></br>
                                                         <label for="" > Salary</label>
                                                         <input type="text" class="form-control" name="salary" required></br>
-                                                        <input id="addQuestion" name="addQuestion" class="btn btn-sm btn-primary float-right" type="button" value="Add Question"></br>             
+
+                                                        <!-- For adding Anything dynamically OLD Procedure -->
+                                                        <!-- <input id="addQuestion" name="addQuestion" class="btn btn-sm btn-primary float-right" type="button" value="Add Question"></br> -->
+
+                                                        <!-- For adding anything dynamically New Procedure -->
+                                                        <div class="input_fields_wrap">
+                                                            <button class="btn btn-sm btn-primary float-right add_field_button">Add Question</button>
+                                                        </div>          
                                                     </div><br>    
                                                 </div>
                                             </div>
@@ -76,11 +83,39 @@
                                             <button class="btn btn-success" name="count" value='1'>Save</button></br></br>
                                         </div>
                                         <script>
-                                            $(document).ready(function(){
-                                                $('#addQuestion').click(function(){
-                                                    $('#job').append('</br><label for=""><u>Question:</u></label><input type="text" name="questions[]" class="form-control"></br>');
-                                                    $('#job').append('<select id="experience" name="fields[]" class="form-control float-right" style="color:black;" required><option value="" style="color: black;">Choose Field</option><option value="Text Box">Text Box</option><option value="Text Area">Text Area</option><option value="Gender">Gender</option></select>');
+
+                                            // To Add anything dynamically on button click //OLD Procedure
+                                            // $(document).ready(function(){
+                                            //     $('#addQuestion').click(function(){
+                                            //         $('#job').append('</br><label for=""><u>Question:</u></label><input type="text" name="questions[]" class="form-control"></br>');
+                                            //         $('#job').append('<select id="experience" name="fields[]" class="form-control float-right" style="color:black;" required><option value="" style="color: black;">Choose Field</option><option value="Text Box">Text Box</option><option value="Text Area">Text Area</option><option value="Gender">Gender</option></select>');
+                                            //     });
+                                            // });
+
+                                            // To add and remove anything dynamically on button click //NEW Procedure
+                                            $(document).ready(function() 
+                                            {
+                                                // Assigning div and button class to variables fr add and remove process
+                                                var wrapper         = $(".input_fields_wrap");
+                                                var add_button      = $(".add_field_button");
+
+                                                //on add button click
+                                                $(add_button).click(function(e)
+                                                {
+                                                    e.preventDefault();
+
+                                                    // Adding Fields 
+                                                    $(wrapper).append('<div></br><a href="#" class="remove_field">Remove</a></br><label for=""><u>Question:</u></label><input type="text" name="questions[]" class="form-control"/></br><select id="experience" name="fields[]" class="form-control float-right" style="color:black;" required><option value="" style="color: black;">Choose Field</option><option value="Text Box">Text Box</option><option value="Text Area">Text Area</option><option value="Gender">Gender</option></select></div>');
                                                 });
+
+                                                // on remove button click
+                                                $(wrapper).on("click",".remove_field", function(e)
+                                                {
+                                                    e.preventDefault();
+
+                                                    // Deleting Fields 
+                                                    $(this).parent('div').remove();
+                                                })
                                             });
                                         </script>
                                     </div>
