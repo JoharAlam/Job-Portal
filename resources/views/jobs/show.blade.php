@@ -49,10 +49,10 @@
           <div class="w3-card-4 w3-margin w3-white" style="width: 700px;">
         
             <div class="w3-margin" align="right">
-              @if($job->status == '1' && $user->name != 'Admin')
+              @if($job->status == '1')
                   <label align="center" title="opened" class="w3-green" style="height: 10%; width: 15%;">Job Opened</label>
               @endif
-              @if($job->status == '0' && $user->name != 'Admin')
+              @if($job->status == '0')
                   <label align="center" title="closed" class="w3-red" style="height: 10%; width: 15%;">Job Closed</label>
               @endif
             </div>
@@ -87,10 +87,12 @@
                   <a href="{{ url('/job/edit', $job->id) }}" title="Edit Job" class="btn btn-warning" role="button"><i class="fas fa-edit" style="color: black;"></i></a>
                   @endcanany
                 </div>
+                @canany(['Administer roles & permissions' , 'Edit Job'])
                 <div align="center">
                   <label > Status</label></br>
                   <input data-id="{{$job->id}}" name="job_status" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Open" data-off="Close" {{ $job->status ? 'checked' : ''}}>
-                </div>                            
+                </div>
+                @endcanany                            
               </div></br>
             </div>
           </div>
