@@ -116,14 +116,6 @@ class JobController extends Controller
         $job->department = $request->department;
         $job->experience = $request->experience;
         $job->salary = $request->salary;
-        if($request->status == '1')
-        {
-            $job->status = '1';
-        }
-        else
-        {
-            $job->status = '0';
-        }
         $job->save();
 
         $jobs = Job::find($job->id);
@@ -225,5 +217,12 @@ class JobController extends Controller
         $job->delete();
 
         return redirect('show');
+    }
+
+    public function jobStatus(Request $request)
+    {
+        $job = Job::find($request->job_id);
+        $job->status = $request->status;
+        $job->save();
     }
 }

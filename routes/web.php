@@ -28,7 +28,7 @@ Route::post('/jobs/apply', 'JobController@apply')->name('apply');
 Route::get('/job/delete/{id}', 'JobController@destroy')->name('delete');
 Route::get('/job/edit/{id}', 'JobController@edit')->name('edit');
 Route::post('/job/update', 'JobController@update')->name('update');
-
+Route::get('/changeStatus', 'JobController@jobStatus')->name('changeStatus');
 
 Route::resource('users', 'UserController');
 

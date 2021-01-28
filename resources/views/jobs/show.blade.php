@@ -16,10 +16,32 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous"></script>
   </head>
 
   <style>
     body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+        .switch {position: relative; display: inline-block; width: 50px; height: 22px;}
+
+        .switch input {opacity: 0; width: 0; height: 0;}
+
+        .slider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s;}
+
+        .slider:before {position: absolute; content: ""; height: 15px; width: 15px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s;}
+
+        input:checked + .slider {background-color: #2196F3;}
+
+        input:focus + .slider {box-shadow: 0 0 1px #2196F3;}
+
+        input:checked + .slider:before {-webkit-transform: translateX(26px);-ms-transform: translateX(26px);transform: translateX(26px);}
+
+        /* Rounded sliders */
+        .slider.round {border-radius: 34px;}
+
+        .slider.round:before {border-radius: 50%;}
   </style>
 
   <body class="w3-blue-gray">
@@ -31,25 +53,28 @@
     </div>
     
     @foreach($jobs as $i => $job)
+
       <?php 
         if(empty($candidate) && Auth::guest()){}
-          elseif(!empty($candidate) && Auth::user()){
+        elseif(!empty($candidate) && Auth::user()){
         $id = Candidate::where('job_name', $job->title)->where('user_id', Auth::user()->id)->first(); }
+        $user = Auth::user();
       ?>
+
       <div class="w3-row w3-light-blue" style="margin-left: 370px; width: 731px;">
         <!-- Blog entries -->
         <div class="w3-col l8 s12">
           <!-- Blog entry -->
           <div class="w3-card-4 w3-margin w3-white" style="width: 700px;">
         
-          <div class="w3-margin" align="right">
-            @if($job->status == '1')
-                <label align="center" title="opened" class="w3-green" style="height: 10%; width: 15%;">Job Opened</label>
-            @endif
-            @if($job->status == '0')
-                <label align="center" title="closed" class="w3-red" style="height: 10%; width: 15%;">Job Closed</label>
-            @endif
-          </div>
+            <div class="w3-margin" align="right">
+              @if($job->status == '1' && $user->name != 'Admin')
+                  <label align="center" title="opened" class="w3-green" style="height: 10%; width: 15%;">Job Opened</label>
+              @endif
+              @if($job->status == '0' && $user->name != 'Admin')
+                  <label align="center" title="closed" class="w3-red" style="height: 10%; width: 15%;">Job Closed</label>
+              @endif
+            </div>
             <img src="{{ asset('storage/job.png') }}" alt="Nature" style="width:100%; height: 300px">
             <div class="w3-container">
               <h3><b>Title: <u>{{ $job->title }}</u></a></h3>
@@ -65,14 +90,11 @@
               <div class="w3-row" >
                 <div class="w3-col m14 s12">
                   
-                  <?php $user = Auth::user(); ?>
                   @if(!empty($id))
                     <button title="Your are already applied for this job" class="btn btn-success" type="button" style="background-color: green;" disabled>Applied <i class="far fa-file-alt"></i></button>
                   @endif
                   @if(empty($id) || $user->name == 'Admin')
-                    @if($job->status == '1')
                     <a href="{{ url('/jobs/view', $job->id) }}" title="View Job Details" class="btn btn-success" role="button"><i class="fa fa-eye" style="color:black;" ></i></a>
-                    @endif
                   @endif
                   @canany(['Administer roles & permissions' , 'Show Candidates']) 
                   <a href="{{ url('/jobs/appliedCandidates', $job->id) }}" title="View Applied Candidates" class="btn btn-info" role="button"><i class="fa fa-users" style="color: black;"></i></a>
@@ -83,6 +105,10 @@
                   @canany(['Administer roles & permissions' , 'Edit Job'])
                   <a href="{{ url('/job/edit', $job->id) }}" title="Edit Job" class="btn btn-warning" role="button"><i class="fas fa-edit" style="color: black;"></i></a>
                   @endcanany
+                </div>
+                <div align="center">
+                  <label > Status</label></br>
+                  <input data-id="{{$job->id}}" name="job_status" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Open" data-off="Close" {{ $job->status ? 'checked' : ''}}>
                 </div>                            
               </div></br>
             </div>
@@ -92,10 +118,21 @@
     @endforeach
   </body>
   <script>
-    $(document).ready(function(){
-        $('#status').click(function(){
-        });
+    $('.toggle-class').change(function()
+    {
+      var status =  $(this).prop('checked') == true ? 1 : 0;
+      var job_id = $(this).data('id');
+
+      $.ajax(
+      {
+        type: "GET",
+        dataType: "json",
+        url: '/changeStatus',
+        data: {'status': status , 'job_id': job_id}
+      });
+
+      //alert('Job status updated successfully');
     });
-    </script>
+  </script>
 </html>
 @endsection

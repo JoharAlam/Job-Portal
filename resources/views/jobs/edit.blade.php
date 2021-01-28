@@ -19,25 +19,6 @@
 
     <style>
         body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-
-        .switch {position: relative; display: inline-block; width: 50px; height: 22px;}
-
-        .switch input {opacity: 0; width: 0; height: 0;}
-
-        .slider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s;}
-
-        .slider:before {position: absolute; content: ""; height: 15px; width: 15px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s;}
-
-        input:checked + .slider {background-color: #2196F3;}
-
-        input:focus + .slider {box-shadow: 0 0 1px #2196F3;}
-
-        input:checked + .slider:before {-webkit-transform: translateX(26px);-ms-transform: translateX(26px);transform: translateX(26px);}
-
-        /* Rounded sliders */
-        .slider.round {border-radius: 34px;}
-
-        .slider.round:before {border-radius: 50%;}
     </style>
 
     <header align="center" class="w3-container w3-padding-32" style="font-family: cursive;"> 
@@ -61,21 +42,6 @@
                                                 <img src="{{ asset('storage/job.png') }}" alt="Nature" style="width:100%; height: 300px"></br></br>
                                                 <div class="card-body">                                
                                                     <div class="form-group" id="job" style="width:660px; margin-left: 20px;">
-                                                        <div align="center">
-                                                            <label > Status</label></br>
-                                                            @if($job->status == '1')
-                                                                <label class="switch">
-                                                                  <input type="checkbox" class="form-control form-group" value="1" name="status" checked>
-                                                                  <span class="slider round"></span>
-                                                                </label></br>
-                                                            @endif
-                                                            @if($job->status == '0')
-                                                                <label class="switch">
-                                                                  <input type="checkbox" class="form-control form-group" value="1" name="status">
-                                                                  <span class="slider round"></span>
-                                                                </label></br>
-                                                            @endif
-                                                        </div>
                                                         <label for="" > Job</label>
                                                         <input type="text" class="form-control" name="title" value="{{$job->title}}" required></br>
                                                         <label for="" > Department</label>
