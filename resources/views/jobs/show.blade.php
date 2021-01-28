@@ -49,7 +49,7 @@
         <div class="w3-col l8 s12">
           <!-- Blog entry -->
           <div class="w3-card-4 w3-margin w3-white" style="width: 700px;">
-
+            @if($guest || $user->name != 'Admin')
             <div class="w3-margin" align="right">
               @if($job->status == '1')
                   <label align="center" title="opened" class="w3-green" style="height: 10%; width: 15%;">Job Opened</label>
@@ -58,6 +58,7 @@
                   <label align="center" title="closed" class="w3-red" style="height: 10%; width: 15%;">Job Closed</label>
               @endif
             </div>
+            @endif
             <img src="{{ asset('storage/job.png') }}" alt="Nature" style="width:100%; height: 300px">
             <div class="w3-container">
               <h3><b>Title: <u>{{ $job->title }}</u></a></h3>
@@ -108,15 +109,7 @@
         <div class="w3-col l8 s12">
           <!-- Blog entry -->
           <div class="w3-card-4 w3-margin w3-white" style="width: 700px;">
-        
-            <div class="w3-margin" align="right">
-              @if($job->status == '1')
-                  <label align="center" title="opened" class="w3-green" style="height: 10%; width: 15%;">Job Opened</label>
-              @endif
-              @if($job->status == '0')
-                  <label align="center" title="closed" class="w3-red" style="height: 10%; width: 15%;">Job Closed</label>
-              @endif
-            </div>
+            
             <img src="{{ asset('storage/job.png') }}" alt="Nature" style="width:100%; height: 300px">
             <div class="w3-container">
               <h3><b>Title: <u>{{ $job->title }}</u></a></h3>
