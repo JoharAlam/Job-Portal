@@ -28,7 +28,10 @@ Route::post('/jobs/apply', 'JobController@apply')->name('apply');
 Route::get('/job/delete/{id}', 'JobController@destroy')->name('delete');
 Route::get('/job/edit/{id}', 'JobController@edit')->name('edit');
 Route::post('/job/update', 'JobController@update')->name('update');
+<<<<<<< HEAD
 Route::get('/changeStatus', 'JobController@jobStatus')->name('changeStatus');
+=======
+>>>>>>> Feature/countries_data_from_rest_api
 
 Route::resource('users', 'UserController');
 

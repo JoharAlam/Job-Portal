@@ -35,6 +35,7 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
+<<<<<<< HEAD
                 <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -65,6 +66,23 @@
                             </li>
                         @endif
                     </ul>
+=======
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <li href="#" class="dropdown-toggle w3-text-black" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} 
+                            <span class="caret">
+                                <a href="{{ route('logout') }}" class="w3-hover-teal"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    Logout
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                </a>
+                            </span>
+                        </li>
+                    </li>
+                </ul>
+>>>>>>> Feature/countries_data_from_rest_api
             </div>
         </nav>
 
